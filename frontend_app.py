@@ -85,7 +85,7 @@ with cols[2]:
             <img src="https://cdn-icons-png.flaticon.com/512/2819/2819592.png" width="50"><br>
             <p style="margin-top: 0.5rem;">Visibility (km)</p>
     """, unsafe_allow_html=True)
-    visibility = st.slider("", 0.0, 10.0, 2.4, step=0.1)
+    visibility = st.slider("", 0.0, 50.0, 2.4, step=0.1)
     st.markdown("</div>", unsafe_allow_html=True)
 
 # -------------------------
