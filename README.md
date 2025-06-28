@@ -89,4 +89,4 @@ Feel free to fork the repo, create branches for new features or fixes, and submi
 Open issues for bugs or feature requests are also welcome.
 
 ### 📞 Contact
-For questions or collaboration opportunities, please contact saadlacas@gmail.com/anthonyma59727@gmail.com/thomas.wang0421@gmail.com
+For questions or collaboration opportunities, please contact saadlacas@gmail.com | anthonyma59727@gmail.com | thomas.wang0421@gmail.com
