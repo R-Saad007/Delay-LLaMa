@@ -75,7 +75,7 @@ with cols[0]:
 with cols[1]:
     st.markdown("""
         <div class="card" style="text-align:center;">
-            <img src="https://cdn-icons-png.flaticon.com/512/4150/4150897.png" width="50"><br>
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAdVBMVEX///8AAAAwMDDo6OjCwsKWlpaenp67u7t0dHTc3Nxra2urq6uysrL09PTw8PCZmZl/f3/R0dElJSVpaWnKysrY2Nj4+PhQUFBGRkY4ODjk5OQODg6CgoJgYGA8PDyMjIwdHR1LS0ssLCxXV1elpaUVFRUhISH7pxFpAAAEmElEQVR4nO3ca3OiMBiG4QatqKDioS3YKtrW/v+fuDg9LIdAojm+mef+2HVmuaaNaBLy8IAQQgghhBBC5luuCsY22ZPr6zBWyn6aur4SQ/0BGdu6vhYjPbNaseurMdGkLnxxfTUmeqkL2dL15RgoaghHri/HQBDSD0L6QUg/COkHIf0gpB+E9IOQfhA2Wo72s9lsT2uuQ1Y4zl6KzevPy05RvrZ4jWrJCVPWbmz1KlWSEr51gIEJky6wJUxKf/9qJYSLi1D4WP1k6umvVULYHYRcYVW2e7Zy0TclITxIC71cpBMLtzxgn7Dq+OnXL1IkHDVfICGsmvr0viMQ7vg+gbD6Rabe/CKHhas+oEjI2FfpyYe7QeG8FygWMrayyBhoQNg3BGWFE6uQ3vqF4wFfEMIJ76JDEvLvguEIB4dgCMLeu2AoQsEQvE/obAqII+R+0lYWpiy1p6rXEe6PMsDbhXH1xSNx8VGuLZQYgncLGYsSm7bvmsKFzBBUEDL2+mlTd60pfOFcqF7h9ecLm8AH4Y1Pv5Cx0uYbq1hYcj/eKAmr78gzf4QJ/zuUopCxw84P4Wnd8y1RWVi9sX5aGZDDwvP1e7opYZWNN9ZB4ffedoNCG5vnh4Q/t+dghZffKcFQhfnfVJk14SyaJru9LWH2/yX2hN8/fP/IJkkax+M4TpNV+al4W+kR1j8h2xYOX40e4aUxK+9eyOaahXlzttoDISu1CrPWS3wQKuyD6Qo7nzO8ED5qE166C2NeCHNdwiNnwcgLYaRJyP2MEZSQu+QXlJD7jgUhhBBCCOFNwoJHDErI3TcamJCzchuakB2CF7JjazIoPCFjzbmfEIXNLWlBCtm8tuIeprA+GAMV1gZjsMK/wRiu8HcwBixk0TJ04fdg9EJYmBJeL9ML4f0rjcK9GFs/hPc/wSHeT3PmbpSyLFQ4hczJnqibhe8K+1KaQu6Vuhd+qDyc0przfnrt+U8cCgu1BxvbM1HL3DPhl+pRh925tswnYaF+lCNnNpH32K8b4YeOB29586VricFoQahphyZ3RnghHoymhV/aNi72zHkLB6NR4UnnQ6h9s/qiwWhQOI+17jvtXbd4ciOcxrqfyehfmRkejCaEeyMnMwytPQ0NRqq7L1tLT9zTFKSFzeeAuUKV/WqyDa8f9g9GrjDalpMkHe92u3GcTpp/crPHx/Itmx8+zsdoc63ID1Mbh08LVkgXZynhJC/jtd1HYaQTrgH3DEZPDzLhJF7l5t8ZQxLKzNP43L1COgfUSwg5t4JN6enbCicJYeeWcabzJ/ogdxJW89HnufYnIswmI1yc/r8iI+aTPK9tVPz8+8Heg5HakjxVMN4ei/zNu1OuZMLZl/SDkH4Q0g9C+kFIPwjpByH9IKQfhPSDkH4Q0g9C+kFIPwjpByH9IKQfhPSDkH4Q0g9C+kFIPwjpByH9IKQfhPSDkH4Q0g9C+kFIPwjpByH9IKQfhPSDkH4Q0g9C+kFIv+YxyCqn2frapA5UOHHZ357rQjpHI91S7Vw9GyfgueiPaOMQQzctV0fGNhnJw2cQQgghhBBCSF//AJwQRkFLOSqoAAAAAElFTkSuQmCC" width="50"><br>
             <p style="margin-top: 0.5rem;">Wind Speed (knots)</p>
     """, unsafe_allow_html=True)
     wind_speed = st.slider("", 0.0, 50.0, 23.5, step=0.1)
@@ -103,7 +103,7 @@ if st.button("🧠 Predict Delay & Generate Advisory"):
         }
 
         try:
-            response = requests.post("https://delayllamabackend-spm5.onrender.com", json=data)
+            response = requests.post("http://localhost:8000/predict", json=data)
             result = response.json()
 
             # Format delay
