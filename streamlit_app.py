@@ -48,7 +48,7 @@ st.markdown("""
 st.markdown("""
 <div style='position: relative; z-index: 2; text-align: center; color: #f0f0f0;'>
     <h1>Delay 🦙</h1>
-    <p style="margin-top: -15px;">Wisely predicts delays.</p>
+    <p style="margin-top: -15px;">Wisely Predicting Flight Delays Using AI</p>
 </div>
 """, unsafe_allow_html=True)
 
