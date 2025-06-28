@@ -73,7 +73,7 @@ Open your browser at ```http://localhost:8501``` to interact with the app.
 ```bash
 .
 ├── app.py              # FastAPI backend server
-├── frontend_app.py     # Streamlit frontend UI
+├── streamlit_app.py     # Streamlit frontend UI
 ├── requirements.txt    # Python dependencies
 ├── README.md           # Project documentation
 └── .gitignore          # Git ignore rules
