@@ -81,8 +81,8 @@ Open your browser at ```http://localhost:8501``` to interact with the app.
 
 ### 🌍 UN Sustainable Development Goals (SDGs)
 This project aligns primarily with:
-SDG 9: Industry, Innovation and Infrastructure — by enhancing aviation operational efficiency using AI.
-SDG 11: Sustainable Cities and Communities — by improving transportation reliability and passenger experience.
+<br>SDG 9: Industry, Innovation and Infrastructure — by enhancing aviation operational efficiency using AI.
+<br>SDG 11: Sustainable Cities and Communities — by improving transportation reliability and passenger experience.
 
 ### 🙌 Contribution
 Feel free to fork the repo, create branches for new features or fixes, and submit pull requests.
