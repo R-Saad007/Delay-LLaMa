@@ -59,7 +59,7 @@ python -m uvicorn app:app --reload
 ```
 Run the Streamlit frontend:
 ```bash
-python -m streamlit run frontend_app.py
+python -m streamlit run streamlit_app.py
 ```
 Open your browser at ```http://localhost:8501``` to interact with the app.
 
