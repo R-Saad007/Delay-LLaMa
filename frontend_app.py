@@ -1,6 +1,8 @@
 import streamlit as st
-import random
 import requests
+import streamlit.components.v1 as components
+import time
+import streamlit as st
 
 # -------------------------
 # PAGE CONFIG
@@ -46,7 +48,7 @@ st.markdown("""
 st.markdown("""
 <div style='position: relative; z-index: 2; text-align: center; color: #f0f0f0;'>
     <h1>Delay 🦙</h1>
-    <p> Wisely predicts delays.</p>
+    <p style="margin-top: -15px;">Wisely predicts delays.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -91,85 +93,87 @@ with cols[2]:
 # -------------------------
 # BUTTON & OUTPUT
 # -------------------------
+result_placeholder = st.empty()
 if st.button("🧠 Predict Delay & Generate Advisory"):
-    data = {
-        "temp": temp,
-        "wind_speed": wind_speed,
-        "visibility": visibility
-    }
+    with st.spinner("🛫 Running ML and GenAI models to predict delay and generate advisory..."):
+        data = {
+            "temp": temp,
+            "wind_speed": wind_speed,
+            "visibility": visibility
+        }
 
-    try:
-        response = requests.post("http://localhost:8000/predict", json=data)
-        result = response.json()
+        try:
+            response = requests.post("http://localhost:8000/predict", json=data)
+            result = response.json()
 
-        # Format delay
-        delay_min = result['predicted_delay_min']
-        if delay_min >= 60:
-            hrs = delay_min // 60
-            mins = delay_min % 60
-            delay_display = f"{hrs} hr {format(mins, '.1f')} min"
+            # Format delay
+            delay_min = result['predicted_delay_min']
+            if delay_min >= 60:
+                hrs = delay_min // 60
+                mins = delay_min % 60
+                delay_display = f"{hrs} hr {format(mins, '.1f')} min"
 
-        else:
-            delay_display = f"{format(delay_min, '.1f')} min"
+            else:
+                delay_display = f"{format(delay_min, '.1f')} min"
 
-        # -------------------------
-        # SHOW PREDICTION CARD
-        # -------------------------
-        st.markdown(f"""
-            <div class="card" style="text-align: center;">
-                <h2>✈️ Predicted Flight Delay: {delay_display}</h2>
-                <p><i>Based on current conditions: {temp}°C, Wind {wind_speed} knots, Visibility {visibility} km</i></p>
-            </div>
-        """, unsafe_allow_html=True)
+            # -------------------------
+            # SHOW PREDICTION CARD
+            # -------------------------
+            
+            st.markdown(f"""
+                <div class="card" style="text-align: center;">
+                    <h2>✈️ Predicted Flight Delay: {delay_display}</h2>
+                    <p><i>Based on current conditions: {temp}°C, Wind {wind_speed} knots, Visibility {visibility} km</i></p>
+                </div>
+            """, unsafe_allow_html=True)
 
-        # -------------------------
-        # ENRICHED COMBINED NOTE WITH NEW GROUND OPS DETAILS
-        # -------------------------
-        full_advisory = result['advisory']
+            # -------------------------
+            # ENRICHED COMBINED NOTE WITH NEW GROUND OPS DETAILS
+            # -------------------------
+            full_advisory = result['advisory']
 
-        combined_note = (
-            f"🛄 **Passenger Guidance:**\n\n"
-            f"Stay alert for any last-minute scheduling changes. Keep essentials such as medications, chargers, and snacks handy. "
-            f"Use airline mobile notifications and know flexible rebooking policies in case delays extend.\n\n"
+            combined_note = (
+                f"🛄 Passenger Guidance:\n\n"
+                f"Stay alert for any last-minute scheduling changes. Keep essentials such as medications, chargers, and snacks handy. "
+                f"Use airline mobile notifications and know flexible rebooking policies in case delays extend.\n\n"
 
-            f"🧑‍✈️ **Pilot Operations:**\n\n"
-            f"Review crosswind strategy and prepare for variable visibility on approach. Ensure thorough pre-flight checks "
-            f"of alternate runways and coordinate closely with ATC for updated METAR/TAF briefings.\n\n"
+                f"🧑‍✈️ **Pilot Operations:**\n\n"
+                f"Review crosswind strategy and prepare for variable visibility on approach. Ensure thorough pre-flight checks "
+                f"of alternate runways and coordinate closely with ATC for updated METAR/TAF briefings.\n\n"
 
-            f"🏢 **Airport Ground Operations:**\n\n"
-            f"- Prioritize fueling and catering trucks for this flight to minimize turnaround.\n"
-            f"- Coordinate early pushback clearances with ground control to avoid ramp congestion.\n"
-            f"- Ensure baggage handling is ready for priority loading.\n"
-            f"- Cross-check deicing teams if temperatures near freezing.\n"
-            f"- Communicate with cleaning and maintenance staff to expedite cabin readiness.\n\n"
+                f"🏢 **Airport Ground Operations:**\n\n"
+                f"- Prioritize fueling and catering trucks for this flight to minimize turnaround.\n"
+                f"- Coordinate early pushback clearances with ground control to avoid ramp congestion.\n"
+                f"- Ensure baggage handling is ready for priority loading.\n"
+                f"- Cross-check deicing teams if temperatures near freezing.\n"
+                f"- Communicate with cleaning and maintenance staff to expedite cabin readiness.\n\n"
 
-            f"**✈️ AI Insights from Gemini:**\n\n"
-            f"{full_advisory}"
-        )
+                f"**✈️ AI Insights from Gemini:**\n\n"
+                f"{full_advisory}"
+            )
 
-        # -------------------------
-        # SHOW UNIFIED ADVISORY CARD
-        # -------------------------
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown(f"""
-            <div class="card">
-                <h3>📌 Combined Advisory</h3>
-                <p>{combined_note}</p>
-            </div>
-        """, unsafe_allow_html=True)
-
+            # -------------------------
+            # SHOW UNIFIED ADVISORY CARD
+            # -------------------------
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            st.markdown(f"""
+                <div class="card">
+                    <h3>📌 Combined Advisory</h3>
+                    <p>{combined_note}</p>
+                </div>
+            """, unsafe_allow_html=True)
+ 
+            # -------------------------
+            # DOWNLOAD BUTTON
+            # -------------------------
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.download_button(
+                    label="⬇️ Download Advisory Report",
+                    data=combined_note,
+                    file_name="Flight_Advisory_Report.txt",
+                    mime="text/plain"
+                )
         
-        # -------------------------
-        # DOWNLOAD BUTTON
-        # -------------------------
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.download_button(
-            label="⬇️ Download Advisory Report",
-            data=combined_note,
-            file_name="Flight_Advisory_Report.txt",
-            mime="text/plain"
-        )
-
-    except Exception as e:
-        st.error(f"🚨 Error connecting to backend: {e}")
-
+        except Exception as e:
+            st.error(f"🚨 Error connecting to backend: {e}")
