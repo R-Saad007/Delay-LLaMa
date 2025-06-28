@@ -4,6 +4,7 @@ pydantic
 scikit-learn
 numpy
 streamlit
+gunicorn
 
 # Gemini
 google-generativeai
