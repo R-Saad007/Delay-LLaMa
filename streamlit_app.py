@@ -103,7 +103,7 @@ if st.button("🧠 Predict Delay & Generate Advisory"):
         }
 
         try:
-            response = requests.post("http://localhost:8000/predict", json=data)
+            response = requests.post("https://delayllamabackend-spm5.onrender.com", json=data)
             result = response.json()
 
             # Format delay
