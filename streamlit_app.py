@@ -67,9 +67,9 @@ with cols[0]:
     st.markdown("""
         <div class="card" style="text-align:center;">
             <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" width="50"><br>
-            <p style="margin-top: 0.5rem;">Temperature (°C)</p>
+            <p style="margin-top: 0.5rem;">Temperature (°F)</p>
     """, unsafe_allow_html=True)
-    temp = st.slider("", -20.0, 50.0, 12.5,step=0.1)
+    temp = st.slider("", -20.0, 150.0, 12.5,step=0.1)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with cols[1]:
